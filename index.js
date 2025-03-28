@@ -42,7 +42,7 @@ app.get("/search", async (req, res) => {
 
     // Seletor para os resultados
     const resultsSelector = `[aria-label="Resultados para ${searchTerm}"]`;
-    await page.waitForSelector(resultsSelector, { timeout: 90000 }); // Aumenta o tempo limite para o carregamento
+    await page.waitForSelector(resultsSelector, { timeout: 120000 }); // Aumenta o tempo limite para o carregamento
 
     // Rolar a página até carregar todos os resultados
     let previousHeight;
@@ -50,7 +50,7 @@ app.get("/search", async (req, res) => {
       const resultDiv = await page.$(resultsSelector);
       previousHeight = await page.evaluate((el) => el.scrollHeight, resultDiv);
       await page.evaluate((el) => el.scrollBy(0, el.scrollHeight), resultDiv);
-      await new Promise((resolve) => setTimeout(resolve, 6000)); // Aguarda 6 segundos entre as rolagens
+      await new Promise((resolve) => setTimeout(resolve, 18000)); // Aguarda 6 segundos entre as rolagens
       const newHeight = await page.evaluate((el) => el.scrollHeight, resultDiv);
       if (newHeight === previousHeight) break; // Sai do loop se não houver mais resultados
     }
@@ -75,5 +75,5 @@ app.get("/search", async (req, res) => {
 });
 
 // Inicializar o servidor
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
