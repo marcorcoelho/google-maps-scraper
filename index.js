@@ -42,7 +42,7 @@ app.get("/search", async (req, res) => {
 
     // Seletor para os resultados
     const resultsSelector = `[aria-label="Resultados para ${searchTerm}"]`;
-    await page.waitForSelector(resultsSelector, { timeout: 60000 }); // Aumenta o tempo limite para o carregamento
+    await page.waitForSelector(resultsSelector, { timeout: 90000 }); // Aumenta o tempo limite para o carregamento
 
     // Rolar a página até carregar todos os resultados
     let previousHeight;
